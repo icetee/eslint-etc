@@ -42,7 +42,7 @@
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "name": "eslint-etc",
+  "name": "@icetee/eslint-etc",
   "optionalDependencies": {},
   "peerDependencies": {
     "eslint": "^9.0.0",
