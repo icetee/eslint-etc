@@ -1,14 +1,9 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-etc
- */
-
-import { TSESLint as eslint } from "@typescript-eslint/experimental-utils";
+import { RuleTester } from '@typescript-eslint/rule-tester';
+import * as parser from '@typescript-eslint/parser';
 import { resolve } from "path";
 
 export function createRuleTester({
   filename = resolve("./tests/file.ts"),
-  parser = resolve("./node_modules/@typescript-eslint/parser"),
   project = resolve("./tests/tsconfig.json"),
 }: {
   filename?: string;
@@ -31,13 +26,14 @@ export function createRuleTester({
       project: typeScript && types ? project : undefined,
       sourceType: "module",
     } as const;
-    const tester = new eslint.RuleTester({
-      /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-      parser: typeScript ? parser : undefined!,
-      parserOptions,
+    const tester = new RuleTester({
+      languageOptions: {
+        parser: parser,
+      },
+      ...parserOptions,
     });
     const run = tester.run;
-    tester.run = (name, rule, { invalid = [], valid = [] }) =>
+    tester.run = (name: string, rule, { invalid = [], valid = [] }) =>
       run.call(tester, name, rule, {
         invalid: invalid.map((test) => ({ ...test, filename })),
         valid: valid.map((test) =>

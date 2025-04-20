@@ -1,9 +1,4 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-etc
- */
-
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
+import { TSESTree as es } from "@typescript-eslint/utils";
 
 export function hasTypeAnnotation<T extends es.Node>(
   node: T

@@ -1,9 +1,4 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-etc
- */
-
-import { TSESLint } from "@typescript-eslint/experimental-utils";
+import { TSESLint } from "@typescript-eslint/utils";
 
 export function isImport(
   scope: TSESLint.Scope.Scope,

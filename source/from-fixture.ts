@@ -1,17 +1,12 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-etc
- */
-
-import { TSESLint as eslint } from "@typescript-eslint/experimental-utils";
+import { SuggestionOutput, InvalidTestCase, TestCaseError } from '@typescript-eslint/rule-tester';
 
 export function fromFixture<TMessageIds extends string>(
   fixture: string,
   invalidTestCase?: {
     output?: string;
-    suggestions?: readonly eslint.SuggestionOutput<TMessageIds>[] | null;
+    suggestions?: readonly SuggestionOutput<TMessageIds>[] | null;
   }
-): eslint.InvalidTestCase<TMessageIds, never>;
+): InvalidTestCase<TMessageIds, never>;
 
 export function fromFixture<
   TMessageIds extends string,
@@ -19,12 +14,12 @@ export function fromFixture<
 >(
   fixture: string,
   invalidTestCase: Omit<
-    eslint.InvalidTestCase<TMessageIds, TOptions>,
+    InvalidTestCase<TMessageIds, TOptions>,
     "code" | "errors"
   > & {
-    suggestions?: readonly eslint.SuggestionOutput<TMessageIds>[] | null;
+    suggestions?: readonly SuggestionOutput<TMessageIds>[] | null;
   }
-): eslint.InvalidTestCase<TMessageIds, TOptions>;
+): InvalidTestCase<TMessageIds, TOptions>;
 
 export function fromFixture<
   TMessageIds extends string,
@@ -32,12 +27,12 @@ export function fromFixture<
 >(
   fixture: string,
   invalidTestCase: Omit<
-    eslint.InvalidTestCase<TMessageIds, TOptions>,
+    InvalidTestCase<TMessageIds, TOptions>,
     "code" | "errors"
   > & {
-    suggestions?: readonly eslint.SuggestionOutput<TMessageIds>[] | null;
+    suggestions?: readonly SuggestionOutput<TMessageIds>[] | null;
   } = {}
-): eslint.InvalidTestCase<TMessageIds, TOptions> {
+): InvalidTestCase<TMessageIds, TOptions> {
   const { suggestions, ...rest } = invalidTestCase;
   return {
     ...rest,
@@ -47,7 +42,7 @@ export function fromFixture<
 
 function getSuggestions<TMessageIds extends string>(
   suggestions:
-    | readonly eslint.SuggestionOutput<TMessageIds>[]
+    | readonly SuggestionOutput<TMessageIds>[]
     | null
     | undefined,
   suggest: boolean,
@@ -68,12 +63,12 @@ function getSuggestions<TMessageIds extends string>(
 
 function parseFixture<TMessageIds extends string>(
   fixture: string,
-  suggestions?: readonly eslint.SuggestionOutput<TMessageIds>[] | null
+  suggestions?: readonly SuggestionOutput<TMessageIds>[] | null
 ) {
   const errorRegExp =
     /^(?<indent>\s*)(?<error>~+)\s*\[(?<id>\w+)\s*(?<data>.*?)(?:\s*(?<suggest>suggest)\s*(?<indices>[\d\s]*))?\]\s*$/;
   const lines: string[] = [];
-  const errors: eslint.TestCaseError<TMessageIds>[] = [];
+  const errors: TestCaseError<TMessageIds>[] = [];
   let suggestFound = false;
   fixture.split("\n").forEach((line) => {
     const match = line.match(errorRegExp);
@@ -93,7 +88,7 @@ function parseFixture<TMessageIds extends string>(
           suggestions,
           Boolean(match.groups.suggest),
           match.groups.indices?.trim()
-        ) as eslint.TestCaseError<TMessageIds>["suggestions"]),
+        ) as TestCaseError<TMessageIds>["suggestions"]),
       });
       if (match.groups.suggest) {
         suggestFound = true;

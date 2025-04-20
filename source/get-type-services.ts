@@ -1,15 +1,10 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-etc
- */
-
 import {
   ESLintUtils,
   TSESLint,
   TSESTree as es,
-} from "@typescript-eslint/experimental-utils";
+} from "@typescript-eslint/utils";
 import * as tsutils from "tsutils-etc";
-import * as ts from "typescript";
+import ts from "typescript";
 import { isArrowFunctionExpression, isFunctionDeclaration } from "./is";
 
 export function getTypeServices<

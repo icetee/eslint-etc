@@ -4,15 +4,15 @@
     "declaration": false,
     "esModuleInterop": true,
     "lib": ["esnext"],
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "outDir": "build",
     "paths": {},
     "removeComments": true,
     "skipLibCheck": true,
     "sourceMap": false,
     "strict": true,
-    "target": "es2018"
+    "target": "ES2022"
   },
   "exclude": [],
   "include": [
