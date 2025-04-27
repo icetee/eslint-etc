@@ -5,7 +5,7 @@ import {
 } from "@typescript-eslint/utils";
 import * as tsutils from "tsutils-etc";
 import ts from "typescript";
-import { isArrowFunctionExpression, isFunctionDeclaration } from "./is";
+import { isArrowFunctionExpression, isFunctionDeclaration } from "./is.js";
 
 export function getTypeServices<
   TMessageIds extends string,

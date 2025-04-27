@@ -1,5 +1,5 @@
 import { TSESTree as es } from "@typescript-eslint/utils";
-import { getParent } from "./get-parent";
+import { getParent } from "./get-parent.js";
 
 type Predicate = (type: string) => "break" | "continue" | "return";
 

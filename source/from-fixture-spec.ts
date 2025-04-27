@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { stripIndent } from "common-tags";
-import { fromFixture } from "./from-fixture";
+import { fromFixture } from "./from-fixture.js";
 
 describe("fromFixture", () => {
   it("should create an invalid test with a message ID", () => {
